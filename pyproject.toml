@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xyz2png"
-version = "0.0.0"
+version = "0.0.1"
 description = "Convert .xyz file into .png file"
 authors = ["eggplants <w10776e8w@yahoo.co.jp>"]
 license = "MIT"
