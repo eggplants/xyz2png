@@ -1,12 +1,22 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core",
+]
+
 [tool.poetry]
 name = "xyz2png"
 version = "0.0.1"
 description = "Convert .xyz file into .png file"
-authors = ["eggplants <w10776e8w@yahoo.co.jp>"]
+authors = [
+  "eggplants <w10776e8w@yahoo.co.jp>",
+]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/eggplants/xyz2png"
-packages = [{include = "xyz2png"}]
+packages = [
+  { include = "xyz2png" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -18,23 +28,25 @@ pre-commit = "^3.7.0"
 ruff = ">=0.3.4,<0.5.0"
 mypy = "^1.9.0"
 
-[build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [
-  "poetry-core",
-]
-
 [tool.poetry.scripts]
 xyz2png = "xyz2png.main:main"
 
 [tool.black]
 line-length = 120
-target-version = ['py39']
+target-version = [
+  'py39',
+]
 
 [tool.ruff]
-select = ["ALL"]
-ignore = ["D", "ANN101"]
 line-length = 120
+
+select = [
+  "ALL",
+]
+ignore = [
+  "D",
+  "ANN101",
+]
 
 [tool.mypy]
 pretty = true
