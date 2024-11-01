@@ -15,9 +15,9 @@
 )
 
 [![ghcr latest](
-  <https://ghcr-badge.deta.dev/eggplants/xyz2png/latest_tag?trim=major&label=latest>
+  <https://ghcr-badge.egpl.dev/eggplants/xyz2png/latest_tag?trim=major&label=latest>
  ) ![ghcr size](
-  <https://ghcr-badge.deta.dev/eggplants/xyz2png/size>
+  <https://ghcr-badge.egpl.dev/eggplants/xyz2png/size>
 )](
   <https://github.com/eggplants/xyz2png/pkgs/container/xyz2png>
 )
