@@ -27,6 +27,10 @@ def convert_image(xyz_path: Path) -> Image.Image | bytes:
         image = Image.new("RGBA", (width, height))
         pixels = image.load()
 
+        if not pixels:
+            msg = "Blank pixels are not loaded."
+            raise RuntimeError(msg)
+
         for y in range(height):
             for x in range(width):
                 pixels[x, y] = palette[ord(body.read(1))]

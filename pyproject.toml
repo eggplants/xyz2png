@@ -1,35 +1,58 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = [
-  "poetry-core",
+  "poetry-core>=2",
 ]
 
-[tool.poetry]
+[project]
 name = "xyz2png"
 version = "0.0.1"
-description = "Convert .xyz file into .png file"
-authors = [
-  "eggplants <w10776e8w@yahoo.co.jp>",
-]
-license = "MIT"
+description = "Convert.xyz file into.png file"
 readme = "README.md"
-repository = "https://github.com/eggplants/xyz2png"
+keywords = [
+  "image",
+  "png",
+  "rpg-tkool",
+  "xyz",
+]
+license = { text = "MIT" }
+authors = [
+  { name = "eggplants", email = "w10776e8w@yahoo.co.jp" },
+]
+requires-python = ">=3.9,<4"
+
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+  "Typing :: Typed",
+]
+dependencies = [
+  "pillow>=11.1,<12",
+]
+urls.Repository = "https://github.com/eggplants/xyz2png"
+scripts.xyz2png = "xyz2png.main:main"
+
+[tool.poetry]
+requires-poetry = ">=2.0"
 packages = [
   { include = "xyz2png" },
 ]
-
-[tool.poetry.dependencies]
-python = "^3.9"
-pillow = ">=10.2,<12.0"
-types-Pillow = "^10.2.0.20240324"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = ">=3.7,<5.0"
 ruff = ">=0.5.0,<0.9.0"
 mypy = "^1.9.0"
 
-[tool.poetry.scripts]
-xyz2png = "xyz2png.main:main"
+[tool.poetry.requires-plugins]
+poetry-plugin-shell = ">=1.0"
 
 [tool.black]
 line-length = 120
@@ -45,7 +68,6 @@ select = [
 ]
 ignore = [
   "D",
-  "ANN101",
 ]
 
 [tool.mypy]
