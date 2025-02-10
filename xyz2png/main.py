@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import io
-import os
 import struct
 import sys
 import zlib
@@ -11,7 +10,7 @@ from typing import NoReturn
 
 from PIL import Image
 
-__version__ = '1'
+from . import __version__
 
 
 def convert_image(xyz_path: Path) -> Image.Image | bytes:
@@ -105,7 +104,7 @@ def main() -> None:
 
     for xyz_file_path in xyz_dir_path.glob(pattern):
         if save_file_structure:
-            os.makedirs(png_dir_path.joinpath(xyz_file_path.parent), exist_ok=True)
+            png_dir_path.joinpath(xyz_file_path.parent).mkdir(exist_ok=True)
             png_file_path = png_dir_path / f"{xyz_file_path.parent}/{xyz_file_path.stem}.png"
         else:
             png_file_path = png_dir_path / f"{xyz_file_path.stem}.png"
