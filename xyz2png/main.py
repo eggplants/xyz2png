@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import io
+import os
 import struct
 import sys
 import zlib
@@ -10,7 +11,7 @@ from typing import NoReturn
 
 from PIL import Image
 
-from . import __version__
+__version__ = '1'
 
 
 def convert_image(xyz_path: Path) -> Image.Image | bytes:
@@ -62,6 +63,18 @@ def parse_args(test: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="overwrite if png file exists",
     )
+    parser.add_argument(
+        "-r",
+        "--recursive",
+        action="store_true",
+        help="search file recursive",
+    )
+    parser.add_argument(
+        "-s",
+        "--save_file_structure",
+        action="store_true",
+        help="save file structure",
+    )
     parser.add_argument("-V", "--version", action="version", version=__version__)
 
     if test:
@@ -79,13 +92,23 @@ def main() -> None:
     xyz_dir_path = Path(args.xyz_dir_path)
     png_dir_path = Path(args.png_dir_path)
     overwrite = bool(args.overwrite)
+    recursive = bool(args.recursive)
+    save_file_structure = bool(args.save_file_structure)
 
     if png_dir_path.exists() and not png_dir_path.is_dir():
         print_err_and_exit(f"Given output path is not dir: {png_dir_path}")
     png_dir_path.mkdir(exist_ok=True)
 
-    for xyz_file_path in xyz_dir_path.glob("**/*.xyz"):
-        png_file_path = png_dir_path / f"{xyz_file_path.stem}.png"
+    pattern = "*.xyz"
+    if recursive:
+        pattern = "**/*.xyz"
+
+    for xyz_file_path in xyz_dir_path.glob(pattern):
+        if save_file_structure:
+            os.makedirs(png_dir_path.joinpath(xyz_file_path.parent), exist_ok=True)
+            png_file_path = png_dir_path / f"{xyz_file_path.parent}/{xyz_file_path.stem}.png"
+        else:
+            png_file_path = png_dir_path / f"{xyz_file_path.stem}.png"
         if not overwrite and png_file_path.exists():
             print(f"File already exists: {png_file_path.name}")  # noqa: T201
             continue
