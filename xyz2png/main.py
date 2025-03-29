@@ -1,3 +1,5 @@
+"""Convert .xyz file into .png file."""
+
 from __future__ import annotations
 
 import argparse
@@ -14,6 +16,14 @@ from . import __version__
 
 
 def convert_image(xyz_path: Path) -> Image.Image | bytes:
+    """Convert .xyz file into .png file.
+
+    Args:
+        xyz_path (Path): Path to the .xyz file.
+
+    Returns:
+        Image.Image | bytes: Converted image or error message.
+    """
     with xyz_path.open("rb") as f:
         magic = f.read(4)
         if magic != b"XYZ1":
@@ -39,7 +49,14 @@ def convert_image(xyz_path: Path) -> Image.Image | bytes:
 
 
 def parse_args(test: list[str] | None = None) -> argparse.Namespace:
-    """Parse arguments."""
+    """Parse arguments.
+
+    Args:
+        test (list[str] | None, optional): Test arguments. Defaults to None.
+
+    Returns:
+        argparse.Namespace: Parsed arguments.
+    """
     parser = argparse.ArgumentParser(
         prog="xyz2png",
         description="Convert .xyz file into .png file.",
@@ -70,6 +87,8 @@ def parse_args(test: list[str] | None = None) -> argparse.Namespace:
 
 
 def main() -> None:
+    """Main function."""
+
     def print_err_and_exit(message: str) -> NoReturn:
         print(message, file=sys.stderr)  # noqa: T201
         sys.exit(1)

@@ -5,9 +5,9 @@
   )](
   <https://badge.fury.io/py/xyz2png>
 ) [![Maintainability](
-  <https://api.codeclimate.com/v1/badges/3f5110d732ac79473f80/maintainability>
+  <https://qlty.sh/badges/bf03b670-f781-4166-99a6-8d3f5e917f06/maintainability.svg>
   )](
-  <https://codeclimate.com/github/eggplants/xyz2png/maintainability>
+  <https://qlty.sh/gh/eggplants/projects/xyz2png>
 ) [![pre-commit.ci status](
   <https://results.pre-commit.ci/badge/github/eggplants/xyz2png/master.svg>
   )](

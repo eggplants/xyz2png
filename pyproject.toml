@@ -1,12 +1,9 @@
 [build-system]
-build-backend = "poetry.core.masonry.api"
-requires = [
-  "poetry-core>=2",
-]
+build-backend = "hatchling.build"
+requires = [ "hatchling", "uv-dynamic-versioning" ]
 
 [project]
 name = "xyz2png"
-version = "0.0.1"
 description = "Convert.xyz file into.png file"
 readme = "README.md"
 keywords = [
@@ -16,11 +13,8 @@ keywords = [
   "xyz",
 ]
 license = { text = "MIT" }
-authors = [
-  { name = "eggplants", email = "w10776e8w@yahoo.co.jp" },
-]
+authors = [ { name = "eggplants", email = "w10776e8w@yahoo.co.jp" } ]
 requires-python = ">=3.9,<4"
-
 classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
@@ -34,44 +28,58 @@ classifiers = [
   "Topic :: Multimedia :: Graphics :: Graphics Conversion",
   "Typing :: Typed",
 ]
-dependencies = [
-  "pillow>=11.1,<12",
-]
+dynamic = [ "version" ]
+dependencies = [ "pillow>=11.1,<12" ]
+
 urls.Repository = "https://github.com/eggplants/xyz2png"
 scripts.xyz2png = "xyz2png.main:main"
 
-[tool.poetry]
-requires-poetry = ">=2.0"
-packages = [
-  { include = "xyz2png" },
+[dependency-groups]
+dev = [
+  "mypy>=1.9,<2",
+  "pre-commit>=3.7,<5",
+  "ruff>=0.5,<0.9",
+  "taskipy>=1.10.3,<2",
 ]
+docs = [ "pdoc" ]
 
-[tool.poetry.group.dev.dependencies]
-pre-commit = ">=3.7,<5.0"
-ruff = ">=0.5.0,<0.9.0"
-mypy = "^1.9.0"
+[tool.hatch.version]
+# tool.hatch.version.source is not listed in official schema.
+# https://github.com/ninoseki/uv-dynamic-versioning/issues/21
+source = "uv-dynamic-versioning"
 
-[tool.poetry.requires-plugins]
-poetry-plugin-shell = ">=1.0"
+[tool.hatch.build.targets.sdist]
+include = [ "xyz2png" ]
 
-[tool.black]
-line-length = 120
-target-version = [
-  'py39',
-]
+[tool.hatch.build.targets.wheel]
+include = [ "xyz2png" ]
 
 [tool.ruff]
 line-length = 120
-
-select = [
+format.indent-style = "space"
+format.quote-style = "double"
+lint.select = [
   "ALL",
 ]
-ignore = [
-  "D",
-]
+lint.pydocstyle.convention = "google"
 
 [tool.mypy]
 pretty = true
 python_version = "3.9"
 show_error_codes = true
 strict = true
+
+[tool.uv]
+default-groups = [
+  "dev",
+  "docs",
+]
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "semver"
+
+[tool.taskipy.tasks]
+lint = "pre-commit run -a"
+profile = "python -m cProfile"
+gendoc = "pdoc xyz2png -o ./docs --docformat google"
