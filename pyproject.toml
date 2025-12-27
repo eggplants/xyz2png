@@ -38,7 +38,7 @@ scripts.xyz2png = "xyz2png.main:main"
 dev = [
   "mypy>=1.9,<2",
   "pre-commit>=3.7,<5",
-  "ruff>=0.5,<0.9",
+  "ruff>=0.5,<0.15",
   "taskipy>=1.10.3,<2",
 ]
 docs = [ "pdoc" ]
