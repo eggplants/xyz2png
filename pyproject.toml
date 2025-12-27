@@ -24,6 +24,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
   "Topic :: Multimedia :: Graphics :: Graphics Conversion",
   "Typing :: Typed",
@@ -54,6 +55,12 @@ include = [ "xyz2png" ]
 [tool.hatch.build.targets.wheel]
 include = [ "xyz2png" ]
 
+[tool.uv]
+default-groups = [
+  "dev",
+  "docs",
+]
+
 [tool.ruff]
 line-length = 120
 format.indent-style = "space"
@@ -68,12 +75,6 @@ pretty = true
 python_version = "3.9"
 show_error_codes = true
 strict = true
-
-[tool.uv]
-default-groups = [
-  "dev",
-  "docs",
-]
 
 [tool.uv-dynamic-versioning]
 vcs = "git"
